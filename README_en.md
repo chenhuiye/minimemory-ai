@@ -4,7 +4,7 @@
 
 > Use human-verified "Golden Facts" to physically suppress AI hallucinations, providing a lightweight memory tool for instant correction, local storage, and on-the-go usage.
 
-MiniMemory AI is a lightweight Chrome / Edge browser extension designed for heavy AI users (ChatGPT, Claude, Gemini, DeepSeek, etc.). When you notice the AI starting to hallucinate or you lose the context focus in a multi-turn conversation, you can use it to **capture facts, smart compress, and one-click inject**, forcing the AI back on the right logical track.
+MiniMemory AI is a lightweight Chrome / Edge browser extension designed for heavy AI users (ChatGPT, Claude, Gemini, DeepSeek, Kimi, Qwen, Zhipu, Tencent Yuanbao, MiniMax, etc.). When you notice the AI starting to hallucinate or you lose the context focus in a multi-turn conversation, you can use it to **capture facts, smart compress, and one-click inject**, forcing the AI back on the right logical track.
 
 ## ✨ Core Features
 

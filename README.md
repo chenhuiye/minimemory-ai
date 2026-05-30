@@ -4,7 +4,7 @@
 
 > 用人类验证过的“黄金事实”物理压制 AI 幻觉，提供即时纠偏、本地化、随关随走的轻量化记忆工具。
 
-MiniMemory AI 是一个轻量级的 Chrome / Edge 浏览器扩展程序。专为重度 AI 用户（ChatGPT, Claude, Gemini, DeepSeek 等）设计。当你发现 AI 开始胡说八道，或者你在多轮对话中迷失了上下文重点时，你可以用它来**抓取事实、智能压缩、一键注入**，将 AI 强制拉回正确的逻辑轨道。
+MiniMemory AI 是一个轻量级的 Chrome / Edge 浏览器扩展程序。专为重度 AI 用户（ChatGPT, Claude, Gemini, DeepSeek, Kimi, 通义千问, 智谱清言, 腾讯元宝, MiniMax 等）设计。当你发现 AI 开始胡说八道，或者你在多轮对话中迷失了上下文重点时，你可以用它来**抓取事实、智能压缩、一键注入**，将 AI 强制拉回正确的逻辑轨道。
 
 
 ## ✨ 核心特性
