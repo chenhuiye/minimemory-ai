@@ -74,7 +74,7 @@ Open the extension panel, and you will see all your captured memory cards. You c
 - Employs **Shadow DOM** technology to ensure the floating UI injected into webpages is immune to the host page's CSS pollution.
 
 ## 🤝 Contributions & Developer Help Wanted
-This project is currently in the MVP stage. The one-click injection feature (`content.js`) is primarily adapted for ChatGPT and most standard web input fields.
+This project is currently in the MVP stage. The one-click injection feature (`content.js`) is natively adapted not only for ChatGPT but also perfectly compatible with mainstream AI platforms (like Kimi, Qwen, Zhipu, Tencent Yuanbao, MiniMax, etc.) and most standard web input fields.
 
 **⚠️ Help Wanted:**
 Limited by the complex synthetic events and state isolation of modern AI platform frontend frameworks (like React/Vue), our one-click injection might not work perfectly on certain specific platforms. We are eagerly looking for developers familiar with frontend engineering or Chrome extension development to join us and help with deep input field adaptations for the following platforms:
