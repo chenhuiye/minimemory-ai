@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MiniMemory AI</title>
+  <style>
+    :root {
+      --primary: #0056b3;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+      --text: #333;
+      --text-muted: #6c757d;
+    }
+    body {
+      width: 350px;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .settings-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    .settings-btn:hover {
+      opacity: 1;
+    }
+    
+    #settings-panel {
+      display: none;
+      padding: 15px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+    .input-group input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    #save-settings {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #memory-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .memory-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .memory-card.conflict {
+      border-color: #dc3545;
+      background: #fff8f8;
+    }
+    .card-checkbox {
+      margin-top: 4px;
+    }
+    .card-content {
+      flex: 1;
+      overflow: hidden;
+    }
+    .card-tag {
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #e9ecef;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .card-text {
+      font-size: 13px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .action-bar {
+      padding: 12px 10px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .btn {
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      grid-column: span 2;
+    }
+    .btn-secondary {
+      background: #e9ecef;
+      color: var(--text);
+    }
+    .btn-smart {
+      background: #f8f9fa;
+      border: 1px solid #d0d7de;
+      color: #0969da;
+    }
+    .btn-smart:disabled {
+      color: var(--text-muted);
+      background: #f1f3f5;
+      cursor: not-allowed;
+      border-color: var(--border);
+    }
+    .delete-btn {
+      color: #dc3545;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 0;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 id="ui-title">MiniMemory AI</h2>
+    <button class="settings-btn" id="toggle-settings">⚙️ 设置</button>
+  </header>
+
+  <div id="settings-panel">
+    <div class="input-group">
+      <label id="ui-lbl-lang">语言 (Language)</label>
+      <select id="sel-language">
+        <option value="zh">简体中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label id="ui-lbl-shortcut">快捷键 (Alt / Cmd + ?)</label>
+      <input type="text" id="shortcut-key" placeholder="x" maxlength="1" style="text-transform: uppercase;">
+    </div>
+    <div class="input-group">
+      <label id="ui-lbl-endpoint">API Endpoint (兼容 OpenAI 格式)</label>
+      <input type="text" id="api-endpoint" placeholder="https://api.openai.com/v1">
+    </div>
+    <div class="input-group">
+      <label id="ui-lbl-key">API Key</label>
+      <input type="password" id="api-key" placeholder="sk-...">
+    </div>
+    <div class="input-group">
+      <label id="ui-lbl-model">Model</label>
+      <input type="text" id="api-model" placeholder="gpt-3.5-turbo">
+    </div>
+    <button id="save-settings">保存配置</button>
+  </div>
+
+  <div class="list-header" id="list-header" style="display: none; padding: 10px 10px 0 10px; align-items: center; gap: 5px;">
+    <input type="checkbox" id="cb-select-all" checked>
+    <label for="cb-select-all" id="lbl-select-all" style="font-size: 12px; color: var(--text-muted); cursor: pointer; user-select: none;">全选</label>
+  </div>
+  
+  <div id="memory-list">
+    <!-- Memories injected here -->
+  </div>
+
+  <div class="action-bar">
+    <button class="btn btn-primary" id="btn-inject">⚡ 一键注入上下文</button>
+    <button class="btn btn-secondary" id="btn-export">📥 本地导出 (MD)</button>
+    <button class="btn btn-secondary" id="btn-clear">🗑️ 清空所有</button>
+    <button class="btn btn-smart" id="btn-compress">🗜️ 智能压缩 (需Key)</button>
+    <button class="btn btn-smart" id="btn-prompt">📝 生成Prompt (需Key)</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
