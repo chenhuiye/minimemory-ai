@@ -1,3 +1,5 @@
+[English](README_en.md) | [简体中文](README.md)
+
 # MiniMemory AI (闪存助手) ⚡️
 
 > 用人类验证过的“黄金事实”物理压制 AI 幻觉，提供即时纠偏、本地化、随关随走的轻量化记忆工具。
